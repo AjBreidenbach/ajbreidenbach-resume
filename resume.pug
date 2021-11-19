@@ -35,8 +35,12 @@ mixin skill
     block
 
 head
+
   if IS_CV
     style.
+      @media print {
+        @page {margin: 0mm 0mm 0mm 0mm; size: A4;}
+      }
       body {
         height: 11.7in;
         width: 8.3in;
@@ -56,6 +60,9 @@ head
       }
   else
     style. 
+      @media print {
+        @page {margin: 0in 0in 0in 0in; size: letter;}
+      }
       body {
         height: 11in;
         width: 8.5in;
@@ -67,6 +74,7 @@ head
 
     @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
     body {
+      background-color: white;
       font-family: Quicksand;
       font-size: 14px;
       box-sizing: border-box;
@@ -197,6 +205,10 @@ head
         color: blue !important;
       }
       body {margin: 0;}
+
+      tr.pdf-version {
+        display: none;
+      }
     }
 
     .skills-inner {
@@ -250,6 +262,10 @@ body
         tr
           th GitHub:
           td: a(href='https://github.com/AjBreidenbach') AjBreidenbach
+
+        tr.pdf-version
+          th(colspan=2): a(href=(IS_CV? '/Andrew Breidenbach CV.pdf': '/Andrew Breidenbach Resume.pdf')) PDF Version
+
 
 
   .skills.box-shadow
