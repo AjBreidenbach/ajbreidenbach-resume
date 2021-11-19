@@ -1,0 +1,297 @@
+- const IS_CV = process.env.hasOwnProperty('CV')
+mixin project(title, imgsrc, links)
+  .project
+    .project-logo
+      img(src=imgsrc)
+    .project-title #{title}
+    .project-access
+      if links.demo
+        a(href=links.demo)
+          | Site
+          include 1F310.img
+
+      if links.github
+        a(href=links.github)
+          | GitHub
+          include 1F310.img
+      if links.readme
+        a(href=links.readme)
+          | Readme
+          include 1F4C3.img
+
+
+    .project-description
+      block
+
+mixin work(jobTitle, employer, location)
+  p
+    | #[b #{jobTitle}] #{employer} / #{location} 
+    br
+    if block
+      block
+
+mixin skill
+  .skill
+    block
+
+head
+  if IS_CV
+    style.
+      body {
+        height: 11.7in;
+        width: 8.3in;
+        margin: 1em auto;
+        padding: 0.25in 0.5in;
+      }
+      #headshot {
+        border-radius: 50%;
+        margin-right: 1em;
+      }
+
+      .title {
+        padding: 1em 2em;
+        
+        align-items: center;
+        display: flex;
+      }
+  else
+    style. 
+      body {
+        height: 11in;
+        width: 8.5in;
+        margin: 1em auto;
+        padding: 0.25in 0.5in;
+      }
+
+  style.
+
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
+    body {
+      font-family: Quicksand;
+      font-size: 14px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .details th {
+      text-align: left;
+      padding: 0.2em;
+      padding-right: 1em;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5em 0;
+    }
+
+    h1 {
+      border-bottom-style: solid;
+      border-width: 1px;
+      border-color: darkgrey;
+      padding-bottom: 0.2em;
+      transition: border-color 0.25s;
+      font-size: 1.5em;
+      margin-top: 0.25em;
+    }
+
+    .title > h1 {
+      border-style: none;
+      font-size: 2em;
+    }
+
+    .projects-inner {
+      display: flex;
+      justify-content: space-between;
+    }
+    .project {
+      width: 33%;
+      display:flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      text-align: center;
+      font-variant: small-caps;
+      font-size: 1.1em;
+      margin-bottom: 1em;
+    }
+
+    .project-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 70px;
+      height: 70px;
+      margin: 0 auto;
+      border-radius: 35px;
+      background-color: #f7f3e8;
+    }
+
+    .project-logo > img {
+      width: 50px; height: fit-content;
+    }
+
+    img[src="https://bookvoc.com/assets/BV.svg"] {
+      height: 25px;
+    }
+
+    .project-access  {
+      display: flex;
+      justify-content: space-evenly;
+      border-color: darkgrey;
+      border-bottom-style: solid;
+      padding-bottom: 1em;
+      margin: 0 0.5em;
+      border-width: 1px;
+    }
+
+    .project-access > a{
+      display: flex;
+      align-items: center;
+      opacity: 0.8; transition: opacity 0.25s;
+      line-height: 1;
+    }
+
+    .project-access > a:hover {
+      opacity: 1;
+    }
+
+    .project-access svg, .project-access img{
+      width: 1em;
+      margin-left: 0.25em;
+    }
+
+    .project-description {
+      margin: 1em 0.5em;
+      flex-grow: 1;
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    body > div {
+      transition: box-shadow 0.25s;
+      margin: 1em 0em;
+      padding: 0.5em 1em;
+    }
+
+
+    .box-shadow {
+      box-shadow: 1px 1px 3px darkgrey;
+    }
+
+    .box-shadow:hover {
+      box-shadow: 0 1.5px 3px grey;
+    }
+
+    div:hover h1 {
+      border-color: grey;
+    }
+    
+    @media only print {
+      a {
+        color: blue !important;
+      }
+      body {margin: 0;}
+    }
+
+    .skills-inner {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .skill {
+      padding: 0.25em;
+      margin: 0.25em;
+      background-color: #f7f3e8;
+    }
+
+    .education > div > b {
+      width: 30%;
+      display: inline-block;
+    }
+
+body
+  header
+    if IS_CV
+      .title.box-shadow
+        img#headshot(width="80" height="80" src='https://abreidenbach.com/headshot.jpg')
+        div.title-inner
+          h1 Andrew Breidenbach
+          div: i Software Developer
+
+    else
+      .title
+        h1 Andrew Breidenbach
+        div: i Software Developer
+
+  
+    .details
+      table
+        //-tr
+          th Address:
+          td Padinska Skela
+        tr
+          th Email:
+          td: a(href='mailto:breidenbach.aj@gmail.com') breidenbach.aj@gmail.com
+          //-td: a(href='mailto:fakey.fakerson@gmail.com') fakey.fakerson@gmail.com
+        tr
+          th Phone:
+          //-td: a(href='tel:+1') +1(555)555-5555
+          td: a(href='tel:+13126678232') +1(312)667-8232
+        //-tr
+          th Website:
+          td: a(href='https://portfolio.abreidenbach.com') portfolio.abreidenbach.com
+
+        tr
+          th GitHub:
+          td: a(href='https://github.com/AjBreidenbach') AjBreidenbach
+
+
+  .skills.box-shadow
+    h1 Skills
+    .skills-inner
+      +skill MySQL/MariaDB
+      +skill Linux
+      +skill Docker
+      +skill JavaScript/TypeScript
+      +skill Python
+      +skill React/Vue/Svelte
+      +skill Java
+      +skill HTML
+      +skill CSS/Sass
+      +skill Express
+      +skill Flask
+      +skill NginX
+      +skill Apache
+      +skill JavaScript bundlers
+      +skill Version control
+      +skill REST APIs
+
+
+  .projects.box-shadow
+    h1 Projects
+    .projects-inner
+      +project('BookVoc', 'https://bookvoc.com/assets/BV.svg', {readme:'https://bookvoc.com/readme', demo:'https://bookvoc.com'})
+        | Used Svelte, Express, NTLK, MariaDB, Redis, NginX, JSON web tokens, Cypress, Docker, and more to build a dual-language reader app with vocabulary tests and review, sorted content, Reddit style discussions, and several individually translated short stories.
+      +project('VoleKino', 'https://files.abreidenbach.com/public/logos/volekino-colored-logo.svg', {github:'https://github.com/AjBreidenbach/volekino', demo:'https://volekino.com'})
+        | Used the #[a(href='https://nim-lang.org/') Nim programming language] along with FFmpeg, OpenSSH, Apache2, NginX, WebSockets, Sass, Mithril.js, and more to create a media server that enables casual users to self-host and conveniently stream videos with their friends.
+      +project('LawClick', 'https://lawclick.ru/images/logo-small.svg', {readme:'https://lawclick.ru/readme', demo:'https://lawclick.ru'})
+        | Used TypeScript, Express, NginX, Pug, Docker, Rust, and more to develop a free to use, self-service legal site. #[br] #[br] The site is mostly optimized for Russian users.
+
+
+  .education.box-shadow
+    h1 Education
+    div #[b North Dakota State Univeristy] Computer Science / Fargo, North Dakota
+    div(style='opacity:0.8') #[b Kyiv Polytechnic Institute] Computer Engineering / Kyiv, Ukraine
+
+  .work-history.box-shadow
+    h1 Work History
+    +work('Distribution Manager', 'Arctic Glacier', 'Fargo, North Dakota')
+      | Coordinated distribution efforts efficiently to retain over 95% of customers despite a 33% staff shortage.
+    +work ('Transfer Driver', "Karl's TV & Appliance", "Fargo, ND")
+      | Expanded location's transfer schedule from one transfer per week to seven.
